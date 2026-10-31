@@ -25,6 +25,30 @@
       "description": "Xem phim trên trang 123av.com (18+)",
       "type": "video",
       "nsfw": true
+    },
+    {
+      "name": "xHamster",
+      "author": "FreeBook",
+      "path": "https://raw.githubusercontent.com/damhoangbuu98/tangcongcac_ext/main/xhamster/xhamster.zip",
+      "version": 1,
+      "source": "https://xhamster.com",
+      "locale": "en",
+      "icon": "https://raw.githubusercontent.com/damhoangbuu98/tangcongcac_ext/main/xhamster/icon.png",
+      "description": "Xem phim trên trang xhamster.com (18+)",
+      "type": "video",
+      "nsfw": true
+    },
+    {
+      "name": "Pornhub",
+      "author": "FreeBook",
+      "path": "https://raw.githubusercontent.com/damhoangbuu98/tangcongcac_ext/main/pornhub/pornhub.zip",
+      "version": 1,
+      "source": "https://www.pornhub.com",
+      "locale": "en",
+      "icon": "https://raw.githubusercontent.com/damhoangbuu98/tangcongcac_ext/main/pornhub/icon.png",
+      "description": "Xem phim trên trang pornhub.com (18+)",
+      "type": "video",
+      "nsfw": true
     }
   ]
 }

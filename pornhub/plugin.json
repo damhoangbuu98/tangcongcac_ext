@@ -1,0 +1,30 @@
+{
+  "metadata": {
+    "name": "Pornhub",
+    "author": "FreeBook",
+    "version": 1,
+    "source": "https://www.pornhub.com",
+    "description": "Video người lớn từ Pornhub: mới nhất, xem nhiều, đánh giá cao, thể loại, tìm kiếm. Phát HLS theo chất lượng.",
+    "locale": "en",
+    "regexp": "(https?://)?([a-z]+\\.)?pornhub\\.(com|org)/view_video\\.php\\?viewkey=[A-Za-z0-9]+.*",
+    "type": "video",
+    "nsfw": true
+  },
+  "script": {
+    "home": "home.js",
+    "genre": "genre.js",
+    "search": "search.js",
+    "detail": "detail.js",
+    "toc": "toc.js",
+    "chap": "chap.js",
+    "track": "track.js"
+  },
+  "config": {
+    "DOMAIN": {
+      "title": "Tên miền",
+      "default": "https://www.pornhub.com",
+      "mode": "input",
+      "format": "text"
+    }
+  }
+}

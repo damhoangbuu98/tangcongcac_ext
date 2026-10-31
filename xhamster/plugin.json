@@ -1,0 +1,30 @@
+{
+  "metadata": {
+    "name": "xHamster",
+    "author": "FreeBook",
+    "version": 1,
+    "source": "https://xhamster.com",
+    "description": "Video người lớn từ xHamster: mới nhất, xem nhiều, đánh giá cao, thể loại, tìm kiếm. Phát HLS h264.",
+    "locale": "en",
+    "regexp": "(https?://)?([a-z0-9-]+\\.)?xhamster[0-9]*\\.[a-z]+/videos/[^/?#]+/?",
+    "type": "video",
+    "nsfw": true
+  },
+  "script": {
+    "home": "home.js",
+    "genre": "genre.js",
+    "search": "search.js",
+    "detail": "detail.js",
+    "toc": "toc.js",
+    "chap": "chap.js",
+    "track": "track.js"
+  },
+  "config": {
+    "DOMAIN": {
+      "title": "Tên miền",
+      "default": "https://xhamster.com",
+      "values": ["https://xhamster.com", "https://xhamster.desi", "https://xhamster2.com", "https://xhamster19.com"],
+      "mode": "select"
+    }
+  }
+}
