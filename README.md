@@ -15,5 +15,6 @@ https://raw.githubusercontent.com/damhoangbuu98/tangcongcac_ext/main/plugin.json
 | xHamster | `xhamster/` | xhamster.com | 18+ |
 | Pornhub | `pornhub/` | pornhub.com | 18+ |
 | YanHH3D | `yanhh3d/` | yanhh3d.plus | Hoạt hình Trung Quốc |
+| AnimeHay | `animehay/` | animehay16.site | Anime Vietsub, hoạt hình Trung Quốc |
 
 Mỗi thư mục gồm `plugin.json`, `icon.png`, `src/` và file zip để cài (cùng nội dung).

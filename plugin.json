@@ -61,6 +61,18 @@
       "description": "Hoạt hình Trung Quốc thuyết minh / Vietsub trên yanhh3d.plus",
       "type": "video",
       "nsfw": false
+    },
+    {
+      "name": "AnimeHay",
+      "author": "FreeBook",
+      "path": "https://raw.githubusercontent.com/damhoangbuu98/tangcongcac_ext/main/animehay/animehay.zip",
+      "version": 1,
+      "source": "https://animehay16.site",
+      "locale": "vi",
+      "icon": "https://raw.githubusercontent.com/damhoangbuu98/tangcongcac_ext/main/animehay/icon.png",
+      "description": "Anime Vietsub và hoạt hình Trung Quốc trên AnimeHay",
+      "type": "video",
+      "nsfw": false
     }
   ]
 }

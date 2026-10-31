@@ -1,0 +1,30 @@
+{
+  "metadata": {
+    "name": "AnimeHay",
+    "author": "FreeBook",
+    "version": 1,
+    "source": "https://animehay16.site",
+    "description": "Anime Vietsub và hoạt hình Trung Quốc trên AnimeHay",
+    "locale": "vi",
+    "regexp": "(https?://)?(www\\.)?animehay[0-9]*\\.[a-z]+/(thong-tin-phim|xem-phim)/[^/?#]+\\.html",
+    "type": "video",
+    "nsfw": false
+  },
+  "script": {
+    "home": "home.js",
+    "genre": "genre.js",
+    "search": "search.js",
+    "detail": "detail.js",
+    "toc": "toc.js",
+    "chap": "chap.js",
+    "track": "track.js"
+  },
+  "config": {
+    "DOMAIN": {
+      "title": "Tên miền (xem animehay.tv khi bị chặn)",
+      "default": "https://animehay16.site",
+      "mode": "input",
+      "format": "text"
+    }
+  }
+}
