@@ -1,0 +1,45 @@
+{
+  "metadata": {
+    "name": "MissAV",
+    "author": "HuongMT",
+    "version": 4,
+    "source": "https://missav.ai",
+    "regexp": "^(https?://)?(www\\.)?missav[a-z0-9]*\\.[a-z]+/(dm\\d+/)?([a-z]{2,3}/)?([a-z0-9_-]*[-_][a-z]?[0-9][a-z0-9_-]*|[a-z]{1,4}[0-9]{3,5})/?$",
+    "description": "Xem phim trên trang missav.ai (18+)",
+    "locale": "vi_VN",
+    "language": "javascript",
+    "type": "video",
+    "nsfw": true,
+    "tag": "nsfw"
+  },
+  "script": {
+    "home": "home.js",
+    "explore": "explore.js",
+    "genre": "genre.js",
+    "search": "search.js",
+    "detail": "detail.js",
+    "toc": "toc.js",
+    "chap": "chap.js",
+    "track": "track.js"
+  },
+  "config": {
+    "DOMAIN": {
+      "title": "Domain (vd https://missav.ai hoặc https://missav.ai/dm230/vi)",
+      "mode": "input",
+      "format": "text",
+      "default": "https://missav.ai"
+    },
+    "CF_VERIFY": {
+      "title": "Xác minh Cloudflare",
+      "subtitle": "Mở trình duyệt để tự bấm xác minh khi Cloudflare chặn (chỉ cần một lần, cookie được dùng lại)",
+      "mode": "toggle",
+      "default": "true"
+    },
+    "UNCENSORED_ONLY": {
+      "title": "Chỉ duyệt phim rò rỉ không che",
+      "subtitle": "Bật: Khám phá và Thể loại chỉ lấy danh mục Không che (rò rỉ). Tắt: lấy như bình thường. Không ảnh hưởng tìm kiếm",
+      "mode": "toggle",
+      "default": "true"
+    }
+  }
+}

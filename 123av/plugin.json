@@ -1,0 +1,45 @@
+{
+  "metadata": {
+    "name": "123AV",
+    "author": "HuongMT",
+    "version": 1,
+    "source": "https://123av.com",
+    "regexp": "^(https?://)?(www\\.)?123av\\.[a-z]+/([a-z]{2,3}/)?v/[a-z0-9_.-]+/?$",
+    "description": "Xem phim trên trang 123av.com (18+)",
+    "locale": "vi_VN",
+    "language": "javascript",
+    "type": "video",
+    "nsfw": true,
+    "tag": "nsfw"
+  },
+  "script": {
+    "home": "home.js",
+    "explore": "explore.js",
+    "genre": "genre.js",
+    "search": "search.js",
+    "detail": "detail.js",
+    "toc": "toc.js",
+    "chap": "chap.js",
+    "track": "track.js"
+  },
+  "config": {
+    "DOMAIN": {
+      "title": "Domain (vd https://123av.com hoặc https://123av.com/vi)",
+      "mode": "input",
+      "format": "text",
+      "default": "https://123av.com"
+    },
+    "CF_VERIFY": {
+      "title": "Xác minh Cloudflare",
+      "subtitle": "Mở trình duyệt để tự bấm xác minh khi Cloudflare chặn (chỉ cần một lần, cookie được dùng lại)",
+      "mode": "toggle",
+      "default": "true"
+    },
+    "UNCENSORED_ONLY": {
+      "title": "Chỉ duyệt phim rò rỉ không che",
+      "subtitle": "Bật: Khám phá và Thể loại chỉ lấy phim Rò rỉ không che (thể loại của web cũng được lọc). Tắt: lấy như bình thường. Không ảnh hưởng tìm kiếm",
+      "mode": "toggle",
+      "default": "true"
+    }
+  }
+}
