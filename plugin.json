@@ -49,6 +49,18 @@
       "description": "Xem phim trên trang pornhub.com (18+)",
       "type": "video",
       "nsfw": true
+    },
+    {
+      "name": "YanHH3D",
+      "author": "FreeBook",
+      "path": "https://raw.githubusercontent.com/damhoangbuu98/tangcongcac_ext/main/yanhh3d/yanhh3d.zip",
+      "version": 1,
+      "source": "https://yanhh3d.plus",
+      "locale": "vi",
+      "icon": "https://raw.githubusercontent.com/damhoangbuu98/tangcongcac_ext/main/yanhh3d/icon.png",
+      "description": "Hoạt hình Trung Quốc thuyết minh / Vietsub trên yanhh3d.plus",
+      "type": "video",
+      "nsfw": false
     }
   ]
 }
