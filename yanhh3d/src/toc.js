@@ -34,7 +34,7 @@ function readEpisodes(doc, selector, slug, into, index) {
 
 // The detail page has no episode list: open one watch page (both tracks are listed there).
 function execute(url) {
-    url = normalizeUrl(url);
+    url = seriesUrl(url);
     let response = fetchPage(url);
     if (!response.ok) return Response.error("HTTP " + response.status);
     let detail = parsePage(response.text());

@@ -1,7 +1,7 @@
 load('config.js');
 
 function execute(url) {
-    url = normalizeUrl(url);
+    url = seriesUrl(url);
     let response = fetchPage(url);
     if (!response.ok) return Response.error("HTTP " + response.status);
     let doc = parsePage(response.text());

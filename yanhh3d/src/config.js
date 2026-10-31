@@ -76,6 +76,13 @@ function parseEpisodeUrl(url) {
     return { vietsub: !!match[1], slug: match[2], episode: match[3] };
 }
 
+// A shared watch link (`/slug/tap-3`, `/sever2/slug/tap-3`) opens the title page instead.
+function seriesUrl(url) {
+    url = normalizeUrl(url);
+    let parsed = parseEpisodeUrl(url);
+    return parsed ? BASE_URL + "/" + parsed.slug : url;
+}
+
 function episodeUrl(slug, episode, vietsub) {
     return BASE_URL + (vietsub ? "/sever2/" : "/") + slug + "/" + episode;
 }
