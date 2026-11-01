@@ -266,10 +266,44 @@ function pickStreams(state) {
     return out;
 }
 
-function loadStreams(pageUrl) {
+// --- Subtitles ----------------------------------------------------------------------------
+// `xplayerPluginSettings.subtitles.tracks` = [{label: "Vietnamese (auto-generated)", lang: "vi",
+// isOriginal, urls: {vtt}}], often 30+ languages. The app loads only the first entry (on/off button, no
+// language menu), so the order decides what is shown: Vietnamese, then the original language, then English.
+let SUBTITLE_NAMES = {
+    vi: "Tiếng Việt", en: "Tiếng Anh", ja: "Tiếng Nhật", zh: "Tiếng Trung", ko: "Tiếng Hàn",
+    th: "Tiếng Thái", fr: "Tiếng Pháp", de: "Tiếng Đức", es: "Tiếng Tây Ban Nha", ru: "Tiếng Nga",
+    pt: "Tiếng Bồ Đào Nha", it: "Tiếng Ý", id: "Tiếng Indonesia"
+};
+
+function subtitleLabel(track) {
+    let name = SUBTITLE_NAMES[String(track.lang || "").toLowerCase()]
+        || String(track.label || track.lang || "").replace(/\s*\([^)]*\)\s*$/, "");
+    return name + (track.isOriginal ? " (gốc)" : " (tự sinh)");
+}
+
+function pickSubtitles(state) {
+    let settings = state && state.xplayerPluginSettings && state.xplayerPluginSettings.subtitles;
+    let tracks = (settings && settings.tracks) || [];
+    let list = [];
+    for (let i = 0; i < tracks.length; i++) {
+        let track = tracks[i] || {};
+        let url = track.urls && track.urls.vtt;
+        if (!url || String(url).indexOf("http") !== 0) continue;
+        let lang = String(track.lang || "").toLowerCase();
+        let rank = lang === "vi" ? 0 : track.isOriginal ? 1 : lang === "en" ? 2 : 3;
+        list.push({ rank: rank, order: i, item: { data: url, type: "vtt", label: subtitleLabel(track), language: lang } });
+    }
+    list.sort(function (a, b) { return a.rank - b.rank || a.order - b.order; });
+    return list.map(function (entry) { return entry.item; });
+}
+
+// Streams and subtitles of a watch page, read in one request.
+function loadMedia(pageUrl) {
     let response = fetchPage(pageUrl);
     if (!response.ok) return null;
-    return pickStreams(parseInitials(response.text()));
+    let state = parseInitials(response.text());
+    return { streams: pickStreams(state), subtitles: pickSubtitles(state) };
 }
 
 function streamHeaders() {
