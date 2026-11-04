@@ -2,7 +2,7 @@
   "metadata": {
     "name": "123AV",
     "author": "HuongMT",
-    "version": 1,
+    "version": 2,
     "source": "https://123av.com",
     "regexp": "^(https?://)?(www\\.)?123av\\.[a-z]+/([a-z]{2,3}/)?v/[a-z0-9_.-]+/?$",
     "description": "Xem phim trên trang 123av.com (18+)",
@@ -23,6 +23,67 @@
     "track": "track.js"
   },
   "config": {
+    "EXPLORE_RANK": {
+      "title": "Bảng xếp hạng Trang chủ",
+      "subtitle": "Bảng hiện ở tab Trang chủ; các bảng còn lại thành chip",
+      "mode": "select",
+      "format": "single",
+      "values": [
+        "Mới cập nhật",
+        "Mới phát hành",
+        "Nổi bật",
+        "Hot hôm nay",
+        "Hot tuần",
+        "Hot tháng",
+        "Xem nhiều nhất",
+        "Theo dõi nhiều nhất",
+        "Dài nhất"
+      ],
+      "default": "Hot hôm nay"
+    },
+    "EXPLORE_LAYOUT": {
+      "title": "Kiểu hiển thị bảng",
+      "subtitle": "Chỉ áp cho tab Trang chủ",
+      "mode": "select",
+      "format": "single",
+      "values": [
+        "Xếp hạng (đánh số)",
+        "Danh sách",
+        "Lưới",
+        "Hàng ngang"
+      ],
+      "default": "Xếp hạng (đánh số)"
+    },
+    "FILTER_SORT": {
+      "title": "Sắp xếp",
+      "mode": "select",
+      "format": "single",
+      "values": [
+        "Mặc định",
+        "Mới cập nhật",
+        "Mới phát hành",
+        "Nổi bật",
+        "Hot hôm nay",
+        "Hot tuần",
+        "Hot tháng",
+        "Xem nhiều nhất",
+        "Theo dõi nhiều nhất",
+        "Dài nhất"
+      ],
+      "default": "Mặc định"
+    },
+    "FILTER_CENSOR": {
+      "title": "Che / không che",
+      "mode": "select",
+      "format": "single",
+      "values": [
+        "Tất cả",
+        "Kiểm duyệt",
+        "Không kiểm duyệt",
+        "Rò rỉ không che"
+      ],
+      "default": "Rò rỉ không che"
+    },
     "DOMAIN": {
       "title": "Domain (vd https://123av.com hoặc https://123av.com/vi)",
       "mode": "input",
@@ -32,12 +93,6 @@
     "CF_VERIFY": {
       "title": "Xác minh Cloudflare",
       "subtitle": "Mở trình duyệt để tự bấm xác minh khi Cloudflare chặn (chỉ cần một lần, cookie được dùng lại)",
-      "mode": "toggle",
-      "default": "true"
-    },
-    "UNCENSORED_ONLY": {
-      "title": "Chỉ duyệt phim rò rỉ không che",
-      "subtitle": "Bật: Khám phá và Thể loại chỉ lấy phim Rò rỉ không che (thể loại của web cũng được lọc). Tắt: lấy như bình thường. Không ảnh hưởng tìm kiếm",
       "mode": "toggle",
       "default": "true"
     }

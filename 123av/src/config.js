@@ -29,12 +29,22 @@ try {
 } catch (error) {
 }
 
-// UNCENSORED_ONLY (toggle, mặc định bật): Khám phá, home và Thể loại chỉ lấy phim "Rò rỉ không che".
-var UNCENSORED_ONLY_ENABLED = true;
+// Các ô chọn (select): giữ nguyên chữ đã chọn, common.js đổi ra mã (chữ lạ hoặc thiếu ⇒ mặc định).
+// EXPLORE_RANK: bảng xếp hạng ở tab Trang chủ; EXPLORE_LAYOUT: kiểu hiển thị bảng đó;
+// FILTER_SORT: sắp xếp mọi danh sách và tìm kiếm; FILTER_CENSOR: che / không che của mọi danh sách (tìm kiếm bỏ qua).
+function configText(value) {
+    return value == null ? "" : String(value).trim();
+}
+
+var EXPLORE_RANK_TEXT = "";
+var EXPLORE_LAYOUT_TEXT = "";
+var FILTER_SORT_TEXT = "";
+var FILTER_CENSOR_TEXT = "";
 try {
-    if (typeof UNCENSORED_ONLY !== "undefined" && String(UNCENSORED_ONLY) === "false") {
-        UNCENSORED_ONLY_ENABLED = false;
-    }
+    EXPLORE_RANK_TEXT = configText(typeof EXPLORE_RANK !== "undefined" ? EXPLORE_RANK : "");
+    EXPLORE_LAYOUT_TEXT = configText(typeof EXPLORE_LAYOUT !== "undefined" ? EXPLORE_LAYOUT : "");
+    FILTER_SORT_TEXT = configText(typeof FILTER_SORT !== "undefined" ? FILTER_SORT : "");
+    FILTER_CENSOR_TEXT = configText(typeof FILTER_CENSOR !== "undefined" ? FILTER_CENSOR : "");
 } catch (error) {
 }
 

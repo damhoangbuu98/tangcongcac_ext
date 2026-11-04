@@ -27,9 +27,11 @@ var CATEGORIES = [
     ["clive", "Live Trung Quốc"]
 ];
 
-// Các kiểu sắp xếp của danh mục "Không che (rò rỉ)" (/vi/uncensored-leak?sort=...). Tham số filters=uncensored-leak
-// chỉ có tác dụng ở trang tìm kiếm, các trang danh sách khác bỏ qua nó, nên chế độ chỉ-không-che dùng danh mục này.
-var LEAK_SORTS = [
+// Các kiểu sắp xếp của trang danh sách (?sort=...), tên trùng với lựa chọn EXPLORE_RANK / FILTER_SORT trong cài đặt.
+// Mọi trang danh sách (danh mục, thể loại, diễn viên, hãng, tìm kiếm) đều nhận, link trang kế (a[rel=next]) giữ sort.
+// Tham số filters=uncensored-leak chỉ có tác dụng ở trang tìm kiếm, các trang danh sách khác bỏ qua nó, nên chế độ
+// Không che duyệt bằng danh mục /vi/uncensored-leak với các kiểu sắp xếp này.
+var SORTS = [
     ["published_at", "Mới cập nhật"],
     ["released_at", "Mới phát hành"],
     ["today_views", "Hot hôm nay"],
@@ -38,7 +40,16 @@ var LEAK_SORTS = [
     ["views", "Xem nhiều nhất"],
     ["saved", "Lưu nhiều nhất"]
 ];
+var DEFAULT_RANK_SORT = "today_views";
 var LEAK_PREFIX = "Không che · ";
+
+// Mã sort theo tên hiện ở cài đặt; không khớp (kể cả "Mặc định") ⇒ "".
+function sortCode(name) {
+    for (var i = 0; i < SORTS.length; i++) {
+        if (SORTS[i][1] === name) return SORTS[i][0];
+    }
+    return "";
+}
 
 function categoryUrl(path) {
     return SITE_URL + "/" + path;
@@ -48,18 +59,57 @@ function leakUrl(sort) {
     return categoryUrl("uncensored-leak") + (sort ? "?sort=" + sort : "");
 }
 
-// Danh mục cho home, Thể loại và hàng chip của Khám phá: [{ title, label (tên ngắn cho chip), input }].
-function browseCategories() {
+// Thêm tham số query, ghép "?" / "&" đúng chỗ (trước #hash nếu có). URL đã có tham số đó hoặc value rỗng ⇒ giữ nguyên.
+function addQuery(url, key, value) {
+    var u = String(url || "");
+    if (!value) return u;
+    var hash = "";
+    var h = u.indexOf("#");
+    if (h >= 0) {
+        hash = u.substring(h);
+        u = u.substring(0, h);
+    }
+    if (new RegExp("[?&]" + key + "=").test(u)) return u + hash;
+    u = u.replace(/[?&]+$/, "");
+    return u + (u.indexOf("?") >= 0 ? "&" : "?") + key + "=" + value + hash;
+}
+
+// FILTER_SORT ("Sắp xếp" trong cài đặt) cho trang danh sách chưa tự chọn sort; bảng xếp hạng đã có sort= thì giữ.
+// Danh mục tự mang thứ tự riêng (Mới cập nhật, Mới phát hành, Hot hôm nay/tuần/tháng): không ghi đè bằng ô "Sắp xếp".
+function hasOwnOrder(url) {
+    return /\/(new|release|today-hot|weekly-hot|monthly-hot)\/?(?:[?#]|$)/.test(String(url));
+}
+
+function sortedUrl(url) {
+    return hasOwnOrder(url) ? String(url || "") : addQuery(url, "sort", sortCode(FILTER_SORT_NAME));
+}
+
+// Bảng xếp hạng theo kiểu sắp xếp: chế độ Không che ⇒ danh mục /vi/uncensored-leak; Tất cả ⇒ /vi/new (mọi phim).
+function rankUrl(sort) {
+    return LEAK_ONLY ? leakUrl(sort) : addQuery(categoryUrl("new"), "sort", sort);
+}
+
+// Mọi bảng xếp hạng theo chế độ che: [{ code, title (tên trang danh sách), label (tên ngắn cho chip), input }].
+function rankCategories() {
     var out = [];
-    var i;
-    if (UNCENSORED_ONLY_ENABLED) {
-        for (i = 0; i < LEAK_SORTS.length; i++) {
-            out.push({ title: LEAK_PREFIX + LEAK_SORTS[i][1], label: LEAK_SORTS[i][1], input: leakUrl(LEAK_SORTS[i][0]) });
-        }
-    } else {
-        for (i = 0; i < CATEGORIES.length; i++) {
-            out.push({ title: CATEGORIES[i][1], label: CATEGORIES[i][1], input: categoryUrl(CATEGORIES[i][0]) });
-        }
+    for (var i = 0; i < SORTS.length; i++) {
+        out.push({
+            code: SORTS[i][0],
+            title: (LEAK_ONLY ? LEAK_PREFIX : "") + SORTS[i][1],
+            label: SORTS[i][1],
+            input: rankUrl(SORTS[i][0])
+        });
+    }
+    return out;
+}
+
+// Danh mục cho home, Thể loại và hàng chip của Khám phá: [{ title, label (tên ngắn cho chip), input }].
+// Chế độ Không che: các kiểu sắp xếp của danh mục Không che (rò rỉ), cũng chính là các bảng xếp hạng.
+function browseCategories() {
+    if (LEAK_ONLY) return rankCategories();
+    var out = [];
+    for (var i = 0; i < CATEGORIES.length; i++) {
+        out.push({ title: CATEGORIES[i][1], label: CATEGORIES[i][1], input: categoryUrl(CATEGORIES[i][0]) });
     }
     return out;
 }

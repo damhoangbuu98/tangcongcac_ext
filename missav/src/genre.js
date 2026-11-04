@@ -2,7 +2,7 @@ load('config.js');
 load('common.js');
 
 // Danh mục cố định, sau đó là thể loại trang 1 của /vi/genres (bỏ qua nếu không tải được).
-// Bật "Chỉ duyệt phim rò rỉ không che": chỉ các kiểu sắp xếp của danh mục Không che (rò rỉ), không tải mạng
+// "Che / không che" = Không che (rò rỉ): chỉ các kiểu sắp xếp của danh mục Không che (rò rỉ), không tải mạng
 // (trang thể loại của web không lọc được theo không che).
 function execute() {
     var out = [];
@@ -12,7 +12,7 @@ function execute() {
         seen[cats[i].input] = true;
         out.push({ title: cats[i].title, input: cats[i].input, script: "list.js" });
     }
-    if (UNCENSORED_ONLY_ENABLED) return Response.success(out);
+    if (LEAK_ONLY) return Response.success(out);
 
     var html = loadPage(SITE_URL + "/genres");
     if (html) {

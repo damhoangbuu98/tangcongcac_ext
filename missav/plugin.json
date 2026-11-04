@@ -2,7 +2,7 @@
   "metadata": {
     "name": "MissAV",
     "author": "HuongMT",
-    "version": 4,
+    "version": 5,
     "source": "https://missav.ai",
     "regexp": "^(https?://)?(www\\.)?missav[a-z0-9]*\\.[a-z]+/(dm\\d+/)?([a-z]{2,3}/)?([a-z0-9_-]*[-_][a-z]?[0-9][a-z0-9_-]*|[a-z]{1,4}[0-9]{3,5})/?$",
     "description": "Xem phim trên trang missav.ai (18+)",
@@ -35,11 +35,37 @@
       "mode": "toggle",
       "default": "true"
     },
-    "UNCENSORED_ONLY": {
-      "title": "Chỉ duyệt phim rò rỉ không che",
-      "subtitle": "Bật: Khám phá và Thể loại chỉ lấy danh mục Không che (rò rỉ). Tắt: lấy như bình thường. Không ảnh hưởng tìm kiếm",
-      "mode": "toggle",
-      "default": "true"
+    "EXPLORE_RANK": {
+      "title": "Bảng xếp hạng Trang chủ",
+      "subtitle": "Bảng hiện ở tab Trang chủ; các bảng còn lại thành chip",
+      "mode": "select",
+      "format": "single",
+      "values": ["Mới cập nhật", "Mới phát hành", "Hot hôm nay", "Hot tuần", "Hot tháng", "Xem nhiều nhất", "Lưu nhiều nhất"],
+      "default": "Hot hôm nay"
+    },
+    "EXPLORE_LAYOUT": {
+      "title": "Kiểu hiển thị bảng",
+      "subtitle": "Chỉ áp cho tab Trang chủ",
+      "mode": "select",
+      "format": "single",
+      "values": ["Xếp hạng (đánh số)", "Danh sách", "Lưới", "Hàng ngang"],
+      "default": "Xếp hạng (đánh số)"
+    },
+    "FILTER_SORT": {
+      "title": "Sắp xếp",
+      "subtitle": "Áp cho danh sách chưa tự chọn kiểu sắp xếp: danh mục, thể loại, diễn viên, hãng, tìm kiếm",
+      "mode": "select",
+      "format": "single",
+      "values": ["Mặc định", "Mới cập nhật", "Mới phát hành", "Hot hôm nay", "Hot tuần", "Hot tháng", "Xem nhiều nhất", "Lưu nhiều nhất"],
+      "default": "Mặc định"
+    },
+    "FILTER_CENSOR": {
+      "title": "Che / không che",
+      "subtitle": "Không che: Trang chủ, Thể loại và tìm kiếm chỉ lấy phim rò rỉ. Trang diễn viên, thể loại, hãng mở từ Chi tiết không lọc được",
+      "mode": "select",
+      "format": "single",
+      "values": ["Tất cả", "Không che (rò rỉ)"],
+      "default": "Không che (rò rỉ)"
     }
   }
 }

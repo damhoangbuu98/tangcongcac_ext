@@ -29,11 +29,24 @@ try {
 } catch (error) {
 }
 
-// UNCENSORED_ONLY (toggle, mặc định bật): Khám phá, home và Thể loại chỉ lấy danh mục "Không che (rò rỉ)".
-var UNCENSORED_ONLY_ENABLED = true;
+// Các mục chọn (select) trong cài đặt: app truyền đúng chữ đang chọn. Thiếu thì để rỗng; chữ lạ được đổi về
+// mặc định ở nơi dùng (EXPLORE_RANK: Hot hôm nay, EXPLORE_LAYOUT: Xếp hạng (đánh số), FILTER_SORT: Mặc định).
+var EXPLORE_RANK_NAME = "";
+var EXPLORE_LAYOUT_NAME = "";
+var FILTER_SORT_NAME = "";
 try {
-    if (typeof UNCENSORED_ONLY !== "undefined" && String(UNCENSORED_ONLY) === "false") {
-        UNCENSORED_ONLY_ENABLED = false;
+    if (typeof EXPLORE_RANK !== "undefined" && EXPLORE_RANK) EXPLORE_RANK_NAME = String(EXPLORE_RANK).trim();
+    if (typeof EXPLORE_LAYOUT !== "undefined" && EXPLORE_LAYOUT) EXPLORE_LAYOUT_NAME = String(EXPLORE_LAYOUT).trim();
+    if (typeof FILTER_SORT !== "undefined" && FILTER_SORT) FILTER_SORT_NAME = String(FILTER_SORT).trim();
+} catch (error) {
+}
+
+// FILTER_CENSOR (select, mặc định "Không che (rò rỉ)"): chỉ "Tất cả" mới duyệt như bình thường, chữ lạ ⇒ mặc định.
+// Không che: Khám phá, home và Thể loại chỉ lấy danh mục "Không che (rò rỉ)", tìm kiếm thêm filters=uncensored-leak.
+var LEAK_ONLY = true;
+try {
+    if (typeof FILTER_CENSOR !== "undefined" && String(FILTER_CENSOR).trim() === "Tất cả") {
+        LEAK_ONLY = false;
     }
 } catch (error) {
 }

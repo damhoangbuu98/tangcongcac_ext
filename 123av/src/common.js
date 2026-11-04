@@ -29,8 +29,8 @@ var CATEGORIES = [
     ["makers/s-cute", "S-Cute"]
 ];
 
-// Các kiểu sắp xếp của danh mục "Rò rỉ không che" (/vi/uncensored-leaked?sort=...).
-var LEAK_SORTS = [
+// Các kiểu sắp xếp (?sort=...) mà mọi danh sách và tìm kiếm đều nhận. Tên trùng chữ của ô EXPLORE_RANK và FILTER_SORT.
+var SORTS = [
     ["recent", "Mới cập nhật"],
     ["release_date", "Mới phát hành"],
     ["hot", "Nổi bật"],
@@ -41,36 +41,95 @@ var LEAK_SORTS = [
     ["follows", "Theo dõi nhiều nhất"],
     ["longest", "Dài nhất"]
 ];
-var LEAK_PREFIX = "Không che · ";
-var LEAK_TYPE = "uncensored-leaked";
+var DEFAULT_EXPLORE_RANK = "Hot hôm nay";
+
+// Ô "Che / không che" (FILTER_CENSOR) → tham số type= của danh sách ("" = không lọc).
+var CENSOR_TYPES = [
+    ["Tất cả", ""],
+    ["Kiểm duyệt", "censored"],
+    ["Không kiểm duyệt", "uncensored"],
+    ["Rò rỉ không che", "uncensored-leaked"]
+];
+var DEFAULT_CENSOR = "Rò rỉ không che";
+
+// Ô "Kiểu hiển thị bảng" (EXPLORE_LAYOUT) → type của section Trang chủ.
+var EXPLORE_LAYOUTS = [
+    ["Xếp hạng (đánh số)", "ranking"],
+    ["Danh sách", "list"],
+    ["Lưới", "grid"],
+    ["Hàng ngang", "horizontal_list"]
+];
+
+// Dòng đầu tiên của bảng có cột nameCol bằng name; không có ⇒ null.
+function findByName(table, nameCol, name) {
+    for (var i = 0; i < table.length; i++) {
+        if (table[i][nameCol] === name) return table[i];
+    }
+    return null;
+}
+
+// Bảng đang chọn ở Trang chủ: [mã sort, tên].
+function exploreRank() {
+    return findByName(SORTS, 1, EXPLORE_RANK_TEXT) || findByName(SORTS, 1, DEFAULT_EXPLORE_RANK);
+}
+
+function exploreLayout() {
+    var found = findByName(EXPLORE_LAYOUTS, 0, EXPLORE_LAYOUT_TEXT);
+    return found ? found[1] : "ranking";
+}
+
+// Mã sort của ô "Sắp xếp"; "Mặc định" hoặc chữ lạ ⇒ "" (giữ thứ tự của trang).
+function filterSortCode() {
+    var found = findByName(SORTS, 1, FILTER_SORT_TEXT);
+    return found ? found[0] : "";
+}
+
+function filterCensorType() {
+    var found = findByName(CENSOR_TYPES, 0, FILTER_CENSOR_TEXT) || findByName(CENSOR_TYPES, 0, DEFAULT_CENSOR);
+    return found[1];
+}
 
 function categoryUrl(path) {
     return SITE_URL + "/" + path;
 }
 
-function leakUrl(sort) {
-    return categoryUrl(LEAK_TYPE) + (sort ? "?sort=" + sort : "");
+function hasQueryParam(url, name) {
+    return new RegExp("[?&]" + name + "=").test(String(url));
 }
 
-// Gắn bộ lọc type=uncensored-leaked: có tác dụng ở trang danh sách, thể loại, tag, nhà sản xuất, diễn viên
-// (trang tìm kiếm bỏ qua nó).
-function withLeakFilter(url) {
-    var u = String(url).replace(/([?&])type=[^&]*&?/, "$1").replace(/[?&]$/, "");
-    return u + (u.indexOf("?") >= 0 ? "&" : "?") + "type=" + LEAK_TYPE;
+function addQueryParam(url, name, value) {
+    var u = String(url).replace(/[?&]$/, "");
+    return u + (u.indexOf("?") >= 0 ? "&" : "?") + name + "=" + value;
 }
 
-// Danh mục cho home, Thể loại và hàng chip của Khám phá: [{ title, label (tên ngắn cho chip), input }].
+// Chính danh mục Kiểm duyệt / Không kiểm duyệt / Rò rỉ không che (/<lang>/censored...): đã là bộ lọc che nên không gắn type=.
+function isCensorCategory(url) {
+    var m = String(url).match(/^https?:\/\/[^\/]+\/(?:[a-z]{2,3}\/)?([^\/?#]*)\/?(?:[?#]|$)/i);
+    return !!m && /^(censored|uncensored|uncensored-leaked)$/i.test(m[1]);
+}
+
+// Gắn bộ lọc của cấu hình vào URL trang đầu của một danh sách: sort= khi ô "Sắp xếp" khác "Mặc định" và URL chưa có
+// sort=; type= khi ô "Che / không che" khác "Tất cả", URL chưa có type= và không phải chính danh mục che / không che.
+// Link trang kế (a[rel=next]) của web đã mang sẵn hai tham số này.
+// Tab tự mang thứ tự riêng (Mới, Gần đây, Nổi bật): ô "Sắp xếp" không ghi đè, nếu không các tab ra giống nhau.
+function hasOwnOrder(url) {
+    return /\/(new|recent|hot)\/?(?:[?#]|$)/.test(String(url));
+}
+
+function withListFilters(url) {
+    var u = String(url);
+    var sort = hasOwnOrder(u) ? "" : filterSortCode();
+    var type = filterCensorType();
+    if (sort && !hasQueryParam(u, "sort")) u = addQueryParam(u, "sort", sort);
+    if (type && !hasQueryParam(u, "type") && !isCensorCategory(u)) u = addQueryParam(u, "type", type);
+    return u;
+}
+
+// Danh mục cố định cho home, Thể loại và hàng chip của Khám phá: [{ title, input }]. Bộ lọc áp ở list.js.
 function browseCategories() {
     var out = [];
-    var i;
-    if (UNCENSORED_ONLY_ENABLED) {
-        for (i = 0; i < LEAK_SORTS.length; i++) {
-            out.push({ title: LEAK_PREFIX + LEAK_SORTS[i][1], label: LEAK_SORTS[i][1], input: leakUrl(LEAK_SORTS[i][0]) });
-        }
-    } else {
-        for (i = 0; i < CATEGORIES.length; i++) {
-            out.push({ title: CATEGORIES[i][1], label: CATEGORIES[i][1], input: categoryUrl(CATEGORIES[i][0]) });
-        }
+    for (var i = 0; i < CATEGORIES.length; i++) {
+        out.push({ title: CATEGORIES[i][1], input: categoryUrl(CATEGORIES[i][0]) });
     }
     return out;
 }

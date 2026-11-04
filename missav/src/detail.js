@@ -40,6 +40,7 @@ function execute(url) {
     var actresses = [];
     var genres = [];
     var others = [];
+    var maker = null;
     var seen = {};
     var links = doc.select("div.space-y-2 a[href]");
     for (var j = 0; j < links.size(); j++) {
@@ -58,6 +59,7 @@ function execute(url) {
             entry.title = "Series: " + title;
             others.push(entry);
         } else if (href.indexOf("/makers/") >= 0) {
+            if (!maker) maker = { title: "Cùng hãng: " + title, input: link, script: "list.js" };
             entry.title = "Hãng: " + title;
             others.push(entry);
         }
@@ -65,6 +67,14 @@ function execute(url) {
 
     var author = [];
     for (var k = 0; k < actresses.length; k++) author.push(actresses[k].title);
+
+    // Đề xuất: video gợi ý của trang nạp bằng JS (Recombee, không có trong HTML) nên dùng danh sách cùng diễn viên
+    // đầu tiên và cùng hãng (thiếu thì bỏ). Hai trang này không lọc được theo không che.
+    var suggests = [];
+    if (actresses.length) {
+        suggests.push({ title: "Cùng diễn viên: " + actresses[0].title, input: actresses[0].input, script: "list.js" });
+    }
+    if (maker) suggests.push(maker);
 
     return Response.success({
         name: name || slug.toUpperCase(),
@@ -77,6 +87,7 @@ function execute(url) {
         nsfw: true,
         type: "video",
         format: "series",
-        genres: actresses.concat(genres, others)
+        genres: actresses.concat(genres, others),
+        suggests: suggests
     });
 }
