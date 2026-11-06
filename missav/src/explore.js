@@ -1,5 +1,17 @@
 load('config.js');
 load('common.js');
+load('censor.js');
+
+// "Bảng xếp hạng Trang chủ" (EXPLORE_RANK) và "Kiểu hiển thị bảng" (EXPLORE_LAYOUT) chỉ áp ở đây nên đọc tại đây.
+// App truyền đúng chữ đang chọn. Thiếu thì để rỗng; chữ lạ được đổi về mặc định ở nơi dùng
+// (EXPLORE_RANK: Hot hôm nay, EXPLORE_LAYOUT: Xếp hạng (đánh số)).
+var EXPLORE_RANK_NAME = "";
+var EXPLORE_LAYOUT_NAME = "";
+try {
+    if (typeof EXPLORE_RANK !== "undefined" && EXPLORE_RANK) EXPLORE_RANK_NAME = String(EXPLORE_RANK).trim();
+    if (typeof EXPLORE_LAYOUT !== "undefined" && EXPLORE_LAYOUT) EXPLORE_LAYOUT_NAME = String(EXPLORE_LAYOUT).trim();
+} catch (error) {
+}
 
 // "Kiểu hiển thị bảng" trong cài đặt (EXPLORE_LAYOUT) → type của section bảng xếp hạng; chữ lạ ⇒ dòng đầu.
 var EXPLORE_LAYOUTS = [

@@ -1,16 +1,39 @@
 load('config.js');
 load('common.js');
+load('censor.js');
 
 // Trang chủ: hàng chip "Bảng khác" (các kiểu sắp xếp không chọn), hàng chip "Danh mục", rồi bảng đang chọn ở ô
 // "Bảng xếp hạng Trang chủ" (EXPLORE_RANK) = /vi/all?sort=<mã>, cả trang đầu, kiểu hiển thị theo ô EXPLORE_LAYOUT.
-// Mọi bảng gắn type= theo ô "Che / không che" (withListFilters). Chỉ tải một trang.
+// Mọi bảng gắn type= theo ô "Che / không che" (withCensorFilter); ô "Sắp xếp" không áp vì URL bảng đã có sort=.
+// Chỉ tải một trang.
+
+var DEFAULT_EXPLORE_RANK = "Hot hôm nay";
+
+// Ô "Kiểu hiển thị bảng" (EXPLORE_LAYOUT) → type của section Trang chủ.
+var EXPLORE_LAYOUTS = [
+    ["Xếp hạng (đánh số)", "ranking"],
+    ["Danh sách", "list"],
+    ["Lưới", "grid"],
+    ["Hàng ngang", "horizontal_list"]
+];
+
+// Bảng đang chọn ở Trang chủ: [mã sort, tên].
+function exploreRank() {
+    return findByName(SORTS, 1, configText(typeof EXPLORE_RANK !== "undefined" ? EXPLORE_RANK : ""))
+        || findByName(SORTS, 1, DEFAULT_EXPLORE_RANK);
+}
+
+function exploreLayout() {
+    var found = findByName(EXPLORE_LAYOUTS, 0, configText(typeof EXPLORE_LAYOUT !== "undefined" ? EXPLORE_LAYOUT : ""));
+    return found ? found[1] : "ranking";
+}
 
 function listAction(name, input) {
     return { type: "list", name: name, script: "list.js", input: input };
 }
 
 function rankUrl(code) {
-    return withListFilters(categoryUrl("all?sort=" + code));
+    return withCensorFilter(categoryUrl("all?sort=" + code));
 }
 
 function otherRankChips(chosen) {

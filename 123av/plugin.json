@@ -2,7 +2,7 @@
   "metadata": {
     "name": "123AV",
     "author": "HuongMT",
-    "version": 2,
+    "version": 3,
     "source": "https://123av.com",
     "regexp": "^(https?://)?(www\\.)?123av\\.[a-z]+/([a-z]{2,3}/)?v/[a-z0-9_.-]+/?$",
     "description": "Xem phim trên trang 123av.com (18+)",

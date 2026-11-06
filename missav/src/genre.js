@@ -1,5 +1,6 @@
 load('config.js');
 load('common.js');
+load('censor.js');
 
 // Danh mục cố định, sau đó là thể loại trang 1 của /vi/genres (bỏ qua nếu không tải được).
 // "Che / không che" = Không che (rò rỉ): chỉ các kiểu sắp xếp của danh mục Không che (rò rỉ), không tải mạng

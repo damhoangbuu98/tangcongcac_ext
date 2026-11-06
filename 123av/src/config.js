@@ -29,23 +29,13 @@ try {
 } catch (error) {
 }
 
-// Các ô chọn (select): giữ nguyên chữ đã chọn, common.js đổi ra mã (chữ lạ hoặc thiếu ⇒ mặc định).
-// EXPLORE_RANK: bảng xếp hạng ở tab Trang chủ; EXPLORE_LAYOUT: kiểu hiển thị bảng đó;
-// FILTER_SORT: sắp xếp mọi danh sách và tìm kiếm; FILTER_CENSOR: che / không che của mọi danh sách (tìm kiếm bỏ qua).
+// Các ô chọn (select): giữ nguyên chữ đã chọn, đổi ra mã ở hàm dùng tới nó (chữ lạ hoặc thiếu ⇒ mặc định).
+// Không đọc ở đây mà ở file dùng tới chúng, vì Bộ lọc của app chỉ hiện ô mà script của tab (cùng các file nó nạp)
+// nhắc tới. EXPLORE_RANK: bảng xếp hạng ở tab Trang chủ, EXPLORE_LAYOUT: kiểu hiển thị bảng đó (explore.js);
+// FILTER_SORT: sắp xếp mọi danh sách và tìm kiếm (sort.js); FILTER_CENSOR: che / không che của mọi danh sách,
+// tìm kiếm bỏ qua (censor.js).
 function configText(value) {
     return value == null ? "" : String(value).trim();
-}
-
-var EXPLORE_RANK_TEXT = "";
-var EXPLORE_LAYOUT_TEXT = "";
-var FILTER_SORT_TEXT = "";
-var FILTER_CENSOR_TEXT = "";
-try {
-    EXPLORE_RANK_TEXT = configText(typeof EXPLORE_RANK !== "undefined" ? EXPLORE_RANK : "");
-    EXPLORE_LAYOUT_TEXT = configText(typeof EXPLORE_LAYOUT !== "undefined" ? EXPLORE_LAYOUT : "");
-    FILTER_SORT_TEXT = configText(typeof FILTER_SORT !== "undefined" ? FILTER_SORT : "");
-    FILTER_CENSOR_TEXT = configText(typeof FILTER_CENSOR !== "undefined" ? FILTER_CENSOR : "");
-} catch (error) {
 }
 
 var SITE_URL = BASE_URL + "/" + LANG;

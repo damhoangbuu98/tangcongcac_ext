@@ -1,5 +1,6 @@
 load('config.js');
 load('common.js');
+load('sort.js');
 
 // Tìm kiếm nhận sort= (ô "Sắp xếp") nhưng bỏ qua type=, nên ô "Che / không che" không áp ở đây.
 function execute(key, page) {

@@ -2,7 +2,7 @@
   "metadata": {
     "name": "MissAV",
     "author": "HuongMT",
-    "version": 5,
+    "version": 6,
     "source": "https://missav.ai",
     "regexp": "^(https?://)?(www\\.)?missav[a-z0-9]*\\.[a-z]+/(dm\\d+/)?([a-z]{2,3}/)?([a-z0-9_-]*[-_][a-z]?[0-9][a-z0-9_-]*|[a-z]{1,4}[0-9]{3,5})/?$",
     "description": "Xem phim trên trang missav.ai (18+)",

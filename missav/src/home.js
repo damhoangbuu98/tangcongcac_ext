@@ -1,5 +1,6 @@
 load('config.js');
 load('common.js');
+load('censor.js');
 
 // Dùng khi app không hỗ trợ explore (có explore thì app bỏ qua home).
 function execute() {

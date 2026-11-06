@@ -1,5 +1,7 @@
 load('config.js');
 load('common.js');
+load('sort.js');
+load('censor.js');
 
 // Trang tìm kiếm nhận filters=uncensored-leak (chế độ Không che: chỉ ra phim rò rỉ) và sort= ("Sắp xếp" trong cài đặt);
 // link trang kế (a[rel=next]) giữ cả hai.
