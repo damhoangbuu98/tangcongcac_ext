@@ -1,0 +1,32 @@
+{
+  "metadata": {
+    "name": "NhacCuaTui",
+    "author": "FreeBook",
+    "version": 1,
+    "source": "https://www.nhaccuatui.com",
+    "description": "Nghe nhạc NhacCuaTui: BXH, Top 100, chủ đề, playlist, nghệ sĩ, lời bài hát (tới 320 kbps)",
+    "locale": "vi",
+    "regexp": "(https?://)?(www\\.|m\\.)?nhaccuatui\\.com/((song|playlist|album|chart|nct-chart)/[A-Za-z0-9_-]+|(playlists|albums)/[^/?#]+/[A-Za-z0-9_-]+|artist/([^/?#]+/)?[0-9]+|(bai-hat|playlist)/[^/?#]+\\.[A-Za-z0-9_-]+\\.html)([?#].*)?",
+    "type": "audio",
+    "nsfw": false
+  },
+  "script": {
+    "explore": "explore.js",
+    "genre": "genre.js",
+    "search": "search.js",
+    "detail": "detail.js",
+    "toc": "toc.js",
+    "chap": "chap.js",
+    "track": "track.js"
+  },
+  "config": {
+    "QUALITY": {
+      "title": "Chất lượng nghe",
+      "subtitle": "320 kbps nghe miễn phí trên NhacCuaTui; bản lossless chỉ dành cho VIP nên không dùng",
+      "mode": "select",
+      "format": "single",
+      "values": ["320 kbps", "128 kbps"],
+      "default": "320 kbps"
+    }
+  }
+}

@@ -1,7 +1,7 @@
 {
   "metadata": {
     "author": "HuongMT",
-    "description": "Kho tiện ích video"
+    "description": "Kho tiện ích video và âm thanh"
   },
   "data": [
     {
@@ -72,6 +72,30 @@
       "icon": "https://raw.githubusercontent.com/damhoangbuu98/tangcongcac_ext/main/animehay/icon.png",
       "description": "Anime Vietsub và hoạt hình Trung Quốc trên AnimeHay",
       "type": "video",
+      "nsfw": false
+    },
+    {
+      "name": "Zing MP3",
+      "author": "FreeBook",
+      "path": "https://raw.githubusercontent.com/damhoangbuu98/tangcongcac_ext/main/zingmp3/zingmp3.zip",
+      "version": 1,
+      "source": "https://zingmp3.vn",
+      "locale": "vi",
+      "icon": "https://raw.githubusercontent.com/damhoangbuu98/tangcongcac_ext/main/zingmp3/icon.png",
+      "description": "Nghe nhạc Zing MP3: #zingchart, Top 100, playlist, nghệ sĩ, lời bài hát (128 kbps, bài VIP bị ẩn)",
+      "type": "audio",
+      "nsfw": false
+    },
+    {
+      "name": "NhacCuaTui",
+      "author": "FreeBook",
+      "path": "https://raw.githubusercontent.com/damhoangbuu98/tangcongcac_ext/main/nhaccuatui/nhaccuatui.zip",
+      "version": 1,
+      "source": "https://www.nhaccuatui.com",
+      "locale": "vi",
+      "icon": "https://raw.githubusercontent.com/damhoangbuu98/tangcongcac_ext/main/nhaccuatui/icon.png",
+      "description": "Nghe nhạc NhacCuaTui: BXH, Top 100, chủ đề, playlist, nghệ sĩ, lời bài hát (tới 320 kbps)",
+      "type": "audio",
       "nsfw": false
     }
   ]

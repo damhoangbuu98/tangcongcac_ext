@@ -1,0 +1,22 @@
+{
+  "metadata": {
+    "name": "Zing MP3",
+    "author": "FreeBook",
+    "version": 1,
+    "source": "https://zingmp3.vn",
+    "description": "Nghe nhạc Zing MP3: #zingchart, Top 100, playlist, nghệ sĩ, lời bài hát (128 kbps, bài VIP bị ẩn)",
+    "locale": "vi",
+    "regexp": "(https?://)?(www\\.|m\\.)?zingmp3\\.vn/((bai-hat|album|playlist|zing-chart-tuan)/[^/?#]+/[A-Za-z0-9]+\\.html|zing-chart|moi-phat-hanh|nghe-si/[^/?#]+)([?#].*)?",
+    "type": "audio",
+    "nsfw": false
+  },
+  "script": {
+    "explore": "explore.js",
+    "genre": "genre.js",
+    "search": "search.js",
+    "detail": "detail.js",
+    "toc": "toc.js",
+    "chap": "chap.js",
+    "track": "track.js"
+  }
+}
